@@ -1,5 +1,5 @@
 use crate::biome::Biome;
-use crate::fractal_noise::FractalNoise;
+use crate::fractal_noise::{FractalNoise, NoiseCfg};
 
 pub struct NoiseMapGen {
     mountain_generator: FractalNoise,
@@ -13,8 +13,8 @@ pub struct NoiseMapGen {
 impl NoiseMapGen {
     pub(crate) fn new(mountain_cfg: GeneratorCfg, detail_cfg: GeneratorCfg, size: [i32; 2]) -> NoiseMapGen {
         NoiseMapGen {
-            mountain_generator: FractalNoise::new(mountain_cfg.seed, mountain_cfg.octaves),
-            detail_generator: FractalNoise::new(detail_cfg.seed, detail_cfg.octaves),
+            mountain_generator: FractalNoise::new(mountain_cfg.seed, mountain_cfg.noise_cfg),
+            detail_generator: FractalNoise::new(detail_cfg.seed, detail_cfg.noise_cfg),
             mountain_cfg,
             detail_cfg,
             size,
@@ -38,5 +38,5 @@ pub struct GeneratorCfg {
     seed: u32,
     scale: f64,
     relevance: f64,
-    octaves: u8,
+    noise_cfg: NoiseCfg
 }
