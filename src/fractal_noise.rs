@@ -23,11 +23,6 @@ impl FractalNoise {
         let mut amplitude = 0.75;
         let mut frequency = 1.0;
         for i in 0..self.noise_cfg.octaves {
-            // let factor: f64 = f64::powi(2.0, i as i32);
-            // let transformed_pos = [pos[0] * factor, pos[1] * factor];
-            // r += self.noise2d.get(transformed_pos).clamp(-0.5, 0.5) / factor;
-
-            // y += amplitude * self.noise2d.get(pos).clamp(-0.5, 0.5);
             y += amplitude * self.noise2d.eval_2d(pos[0] * frequency, pos[1] * frequency);
             frequency *= self.noise_cfg.lacunarity;
             amplitude *= self.noise_cfg.gain;
